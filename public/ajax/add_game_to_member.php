@@ -18,16 +18,20 @@ namespace bga\app\ajax {
     Member::findByRequestId($member);
     Game::findByRequestId($game);
 
+    // Validation.
     if (is_null($game) || is_null($member) || (! App::isPost())) {
         AjaxHelper::outputBadRequest();
     }
 
+    // Get the games for this member from the database.
     $member->loadGames();
 
+    // todo: this shouldn't happen.
     if ($member->hasGame($game)) {
         AjaxHelper::outputSuccessWithData([ 'message' => 'Member already had game.']);
     }
 
+    // Input looks valid. Associate the member with the game.
     if ($member->addGame($game)) {
         AjaxHelper::outputSuccessWithData([ 'message' => 'Added game successfully.']);
     }

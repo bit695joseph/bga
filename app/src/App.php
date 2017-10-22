@@ -5,6 +5,13 @@ namespace bga\app {
     include 'NavItem.php';
     include 'Breadcrumbs.php';
 
+    /**
+     * Class App
+     *
+     * Utility methods.
+     *
+     * @package bga\app
+     */
     class App
     {
         private static $activePage;
@@ -15,23 +22,40 @@ namespace bga\app {
 
         private static $pageTitle;
 
+        /**
+         * Set the page title.
+         * @param $pageTitle
+         */
         public static function setPageTitle($pageTitle)
         {
             self::$pageTitle = $pageTitle;
         }
 
+
+        /**
+         * Sets the highlighted link in the nav menu.
+         * @param $activePage
+         */
         public static function setActivePage($activePage)
         {
             self::$activePage = $activePage;
         }
 
+        /**
+         * True if this page has breadcrumbs defined.
+         * @return bool
+         */
         public static function hasBreadcrumbs()
         {
             return !empty(self::$breadcrumbs);
         }
 
 
-
+        /**
+         * Setse the breadcrumbs for this page.
+         * @param $activeName
+         * @param array $upArr
+         */
         public static function setBreadcrumbs($activeName, $upArr = [])
         {
             self::$breadcrumbs =
@@ -39,11 +63,18 @@ namespace bga\app {
         }
 
 
+        /**
+         * The breadcrumbs for this page.
+         */
         public static function getBreadcrumbs()
         {
             return self::$breadcrumbs;
         }
 
+        /**
+         * Gets the navigation link data.
+         * @return array
+         */
         public static function getNavItems()
         {
             $base = self::publicBaseUrl();
@@ -66,29 +97,48 @@ namespace bga\app {
         }
 
 
+        /**
+         * Address for publicallly accessible files.
+         * @return string
+         */
         private static function publicBaseUrl()
         {
             return self::baseUrl() . '/bga/public/';
         }
 
 
+        /**
+         * Appends the website name to the page title.
+         *
+         * @return string
+         */
         public static function getPageTitle()
         {
             return self::$pageTitle . " | Board Game Aficionados";
         }
 
 
+        /**
+         * Outputs a location header for redirecting.
+         * @param $location
+         */
         public static function redirectTo($location)
         {
             header("Location: {$location}");
         }
 
+        /**
+         * Outputs a 400 header.
+         */
         public static function badRequest()
         {
             header($_SERVER["SERVER_PROTOCOL"] . " 400 bad request.");
             exit();
         }
 
+        /**
+         * Outputs a 500 header.
+         */
         public static function serverError()
         {
             header($_SERVER["SERVER_PROTOCOL"] . " 500 server error.");
@@ -96,11 +146,19 @@ namespace bga\app {
         }
 
 
+        /**
+         * Shorthand for _SERVER['REQUEST_METHOD'] === 'POST';
+         * @return bool
+         */
         public static function isPost()
         {
             return $_SERVER['REQUEST_METHOD'] === 'POST';
         }
 
+        /**
+         * Shorthand for $_SERVER['REQUEST_METHOD'] === 'GET'
+         * @return bool
+         */
         public static function isGet()
         {
             return $_SERVER['REQUEST_METHOD'] === 'GET';
@@ -133,13 +191,20 @@ namespace bga\app {
         }
 
 
+        /**
+         * Sets the data for javascript.
+         * @param $pageData
+         */
         public static function setClientPageData($pageData)
         {
             self::$pageData = $pageData;
         }
 
 
-
+        /**
+         * The client data as a json string.
+         * @return string
+         */
         public static function getClientDataJsonString()
         {
             $baseUrl = baseUrl();

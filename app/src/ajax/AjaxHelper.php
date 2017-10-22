@@ -4,6 +4,13 @@
 namespace bga\app;
 
 
+/**
+ * Class AjaxHelper
+ *
+ * Json responses.
+ *
+ * @package bga\app
+ */
 class AjaxHelper
 {
     // Messages.
@@ -13,6 +20,7 @@ class AjaxHelper
 
 
     /* Public Methods */
+
 
     public static function outputSuccess()
     {
