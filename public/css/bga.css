@@ -1,0 +1,15 @@
+.nav-item.active {
+    text-decoration: underline;
+}
+
+button.row-btn {
+    visibility: hidden;
+}
+
+tr:hover button.row-btn {
+    visibility: visible;
+}
+
+button {
+    cursor: pointer;
+}
